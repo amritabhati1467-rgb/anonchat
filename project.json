@@ -1,0 +1,19 @@
+{
+  "overview": "An anonymous real-time chat app where each user gets a permanent random ID they can share to start private conversations with multiple people.",
+  "features": [
+    "Unique permanent random ID assigned on first visit",
+    "Optional display name / nickname",
+    "Start a chat by entering someone's random ID",
+    "Multiple simultaneous conversations with full message history",
+    "Real-time message delivery via polling"
+  ],
+  "category": "chat-app",
+  "tags": [
+    "chat",
+    "real-time",
+    "anonymous",
+    "messaging",
+    "whatsapp-like"
+  ],
+  "last_updated": "2026-06-06T15:44:18.020Z"
+}

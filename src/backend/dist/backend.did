@@ -1,0 +1,40 @@
+type UserInfo = 
+ record {
+   createdAt: Timestamp;
+   id: UserId;
+   nickname: opt text;
+ };
+type UserId = nat;
+type Timestamp = int;
+type MessageId = nat;
+type Message = 
+ record {
+   conversationId: ConversationId;
+   id: MessageId;
+   senderId: UserId;
+   sentAt: Timestamp;
+   "text": text;
+ };
+type ConversationSummary = 
+ record {
+   id: ConversationId;
+   lastActivityAt: Timestamp;
+   otherUserId: UserId;
+   otherUserNickname: opt text;
+ };
+type ConversationId = nat;
+service : {
+  getMessages: (token: text, conversationId: ConversationId) ->
+   (vec Message) query;
+  getMessagesSince: (token: text, conversationId: ConversationId, since:
+   Timestamp) -> (vec Message) query;
+  getMyProfile: (token: text) -> (opt UserInfo) query;
+  getUserById: (userId: UserId) -> (opt UserInfo) query;
+  listConversations: (token: text) -> (vec ConversationSummary) query;
+  registerUser: (token: text) -> (UserId);
+  sendMessage: (token: text, conversationId: ConversationId, "text": 
+   text) -> (opt MessageId);
+  setNickname: (token: text, nickname: opt text) -> ();
+  startConversation: (token: text, otherUserId: UserId) ->
+   (opt ConversationId);
+}

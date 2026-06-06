@@ -1,0 +1,165 @@
+// Version: 4.0.0
+type ConversationId__147913217 = ConversationId__966455625;
+type ConversationId__966455625 = Nat;
+type Conversation__686238356 =
+  {
+    id : ConversationId__147913217;
+    var lastActivityAt : Timestamp__753029554;
+    participantA : UserId__1023572875;
+    participantB : UserId__1023572875
+  };
+type Data__80296667<K, V> =
+  {var count : Nat__1040412405; kvs : [var ?(K, V)]};
+type Internal__41346355<K, V> =
+  {children : [var ?Node__1000929467<K, V>]; data : Data__80296667<K, V>};
+type Leaf__712614010<K, V> = {data : Data__80296667<K, V>};
+type Map__222667396<K, V> = Map__912772452<K, V>;
+type Map__709709801<K, V> =
+  {var root : Node__1000929467<K, V>; var size : Nat__1040412405};
+type Map__912772452<K, V> = Map__709709801<K, V>;
+type MessageId__291319400 = Nat;
+type MessageId__810287564 = MessageId__291319400;
+type Message__454780518 =
+  {
+    conversationId : ConversationId__147913217;
+    id : MessageId__810287564;
+    senderId : UserId__1023572875;
+    sentAt : Timestamp__753029554;
+    text : Text
+  };
+type Nat__1040412405 = Nat__920180692;
+type Nat__920180692 = Nat;
+type NewActor__719211346 =
+  {
+    conversations :
+      Map__222667396<Nat,
+                      {
+                        id : Nat;
+                        var lastActivityAt : Int;
+                        participantA : Nat;
+                        participantB : Nat
+                      }>;
+    counters :
+      {
+        var nextConversationId : Nat;
+        var nextMessageId : Nat;
+        var nextUserId : Nat
+      };
+    messages :
+      Map__222667396<Nat,
+                      {
+                        conversationId : Nat;
+                        id : Nat;
+                        senderId : Nat;
+                        sentAt : Int;
+                        text : Text
+                      }>;
+    principalToUserId : Map__222667396<Principal, Nat>;
+    users :
+      Map__222667396<Nat, {createdAt : Int; id : Nat; var nickname : ?Text}>
+  };
+type NewActor__749247033 =
+  {
+    conversations :
+      Map__222667396<Nat,
+                      {
+                        id : Nat;
+                        var lastActivityAt : Int;
+                        participantA : Nat;
+                        participantB : Nat
+                      }>;
+    counters :
+      {
+        var nextConversationId : Nat;
+        var nextMessageId : Nat;
+        var nextUserId : Nat
+      };
+    messages :
+      Map__222667396<Nat,
+                      {
+                        conversationId : Nat;
+                        id : Nat;
+                        senderId : Nat;
+                        sentAt : Int;
+                        text : Text
+                      }>;
+    tokenToUserId : Map__222667396<Text, Nat>;
+    users :
+      Map__222667396<Nat, {createdAt : Int; id : Nat; var nickname : ?Text}>
+  };
+type Node__1000929467<K, V> =
+  {#internal : Internal__41346355<K, V>; #leaf : Leaf__712614010<K, V>};
+type OldActor__430996676 = {};
+type OldActor__889745735 =
+  {
+    conversations :
+      Map__222667396<Nat,
+                      {
+                        id : Nat;
+                        var lastActivityAt : Int;
+                        participantA : Nat;
+                        participantB : Nat
+                      }>;
+    counters :
+      {
+        var nextConversationId : Nat;
+        var nextMessageId : Nat;
+        var nextUserId : Nat
+      };
+    messages :
+      Map__222667396<Nat,
+                      {
+                        conversationId : Nat;
+                        id : Nat;
+                        senderId : Nat;
+                        sentAt : Int;
+                        text : Text
+                      }>;
+    principalToUserId : Map__222667396<Principal, Nat>;
+    users :
+      Map__222667396<Nat, {createdAt : Int; id : Nat; var nickname : ?Text}>
+  };
+type Timestamp__301639476 = Int;
+type Timestamp__753029554 = Timestamp__301639476;
+type UserId__1023572875 = UserId__158757552;
+type UserId__158757552 = Nat;
+type User__933853769 =
+  {
+    createdAt : Timestamp__753029554;
+    id : UserId__1023572875;
+    var nickname : ?Text
+  };
+{
+  "20260606_000000_Init" : (_old : OldActor__430996676) -> NewActor__719211346;
+  "20260606_120000_TokenIdentity" :
+    (old : OldActor__889745735) -> NewActor__749247033
+}
+actor  {
+  stable conversations :
+    {
+      var root :
+        Node__1000929467<ConversationId__147913217, Conversation__686238356>;
+      var size : Nat__1040412405
+    };
+  stable counters :
+    {
+      var nextConversationId : Nat;
+      var nextMessageId : Nat;
+      var nextUserId : Nat
+    };
+  stable messages :
+    {
+      var root : Node__1000929467<MessageId__810287564, Message__454780518>;
+      var size : Nat__1040412405
+    };
+  stable tokenToUserId :
+    {
+      var root : Node__1000929467<Text, UserId__1023572875>;
+      var size : Nat__1040412405
+    };
+  stable users :
+    {
+      var root : Node__1000929467<UserId__1023572875, User__933853769>;
+      var size : Nat__1040412405
+    }
+};
